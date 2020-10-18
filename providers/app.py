@@ -52,7 +52,7 @@ class Provider(db.Model):
     def __repr__(self):
         return f'<Provider {self.name} - {self.mispar_osek}>'
 
-db.create_all()
+#db.create_all()
 
 ## Routes
 
@@ -123,4 +123,7 @@ class ProviderResource(Resource):
 api.add_resource(ProviderResource, '/provider/<string:mispar_osek>')
 api.add_resource(ProviderListResource, '/providers')
 
-app.run(port=5000, debug=True)
+if __name__ == "__main__":
+    from db import db
+    db.init_app(app)
+    app.run(port=5001, host='0.0.0.0', debug=True)
